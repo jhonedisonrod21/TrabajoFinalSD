@@ -1,2 +1,2 @@
 start:
-	echo hola
+	docker-compose up --build
