@@ -1,0 +1,66 @@
+version: '3'
+
+services: 
+    load_balancer:
+        container_name: haproxy
+        build: ./load_balancer
+        ports: 
+            - 3001:3001
+        depends_on: 
+            - service_1
+            - service_2
+            - service_3
+
+    service_1:
+        container_name: service_1
+        build: ./server
+        ports: 
+            - 4000:3000
+        volumes: 
+            - ./server/bin/server.js:/usr/src/app/bin/server.js
+            #- ./server/bin/uploads:/usr/src/app/bin/uploads
+            #- ./server/bin/public:/usr/src/app/bin/public
+        environment: 
+            DB_HOST: records_db
+            DB_NAME: records
+        depends_on: 
+            - records_db
+
+    service_2:
+        container_name: service_2
+        build: ./server
+        ports: 
+            - 4001:3000
+        volumes: 
+            - ./server/bin/server.js:/usr/src/app/bin/server.js
+            #- ./server/bin/uploads:/usr/src/app/bin/uploads
+            #- ./server/bin/public:/usr/src/app/bin/public
+        environment: 
+            DB_HOST: records_db
+            DB_NAME: records
+        depends_on: 
+            - records_db
+
+    service_3:
+        container_name: service_3
+        build: ./server
+        ports: 
+            - 4002:3000
+        volumes: 
+            - ./server/bin/server.js:/usr/src/app/bin/server.js
+            #- ./server/bin/uploads:/usr/src/app/bin/uploads
+            #- ./server/bin/public:/usr/src/app/bin/public
+        environment:
+            DB_HOST: records_db
+            DB_NAME: records
+        depends_on: 
+            - records_db
+
+    records_db:           #------base de datos de mongo para registros y archivos mp3
+        image: mongo:4.0
+        container_name: records_db
+        restart: always
+        environment:
+            MONGO_INITDB_DATABASE: records #-----nombre de la base de datos que se crea
+        logging:
+            driver: none

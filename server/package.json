@@ -1,0 +1,27 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./bin/server.js",
+    "dev": "nodemon ./bin/server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon":"2.0.2",
+    "express":"4.17.1",
+    "body-parser": "1.19.0",
+    "popsicle":"12.0.5",
+    "get-urls":"9.2.0", 
+    "nodemailer":"6.4.2",
+    "file-system":"2.2.2",
+    "axios":"0.19.2",
+    "url":"0.11.0",
+    "file-info":"1.0.0",
+    "zip-folder":"1.0.0",
+    "html-pdf":"2.2.0",
+    "mongodb":"^2.2.33"      
+  }
+}
